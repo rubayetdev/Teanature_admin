@@ -10,101 +10,137 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/profile',[ProfileController::class,'index'])->name('profile');
-
-Route::get('/dashboard', [LoginController::class, 'welcomePage'])->name('welcomePage');
-
 Route::post('/login', [LoginController::class, 'loginController'])->name('login');
 
-Route::get('/add-category',[DashboardController::class,'add_category'])->name('addCategory');
 
-Route::post('/insert-category',[DashboardController::class,'insert_category'])->name('insertCategory');
+    Route::get('/profile',[ProfileController::class,'index'])->name('profile');
 
-Route::get('/display-category',[DashboardController::class,'display_category'])->name('displayCategory');
+    Route::get('/dashboard', [LoginController::class, 'welcomePage'])->name('welcomePage');
 
-Route::get('/update-category',[DashboardController::class,'update_category'])->name('updateCategory');
 
-Route::post('/category-update',[DashboardController::class,'category_update'])->name('categoryUpdate');
 
-Route::get('/delete-category',[DashboardController::class,'delete_category'])->name('deleteCategory');
+    Route::get('/add-category',[DashboardController::class,'add_category'])->name('addCategory');
 
-Route::get('/add-product',[DashboardController::class,'add_product'])->name('addProduct');
+    Route::post('/insert-category',[DashboardController::class,'insert_category'])->name('insertCategory');
 
-Route::post('/insert-product',[DashboardController::class,'insert_product'])->name('insertProduct');
+    Route::get('/display-category',[DashboardController::class,'display_category'])->name('displayCategory');
 
-Route::get('/display-product',[DashboardController::class,'display_products'])->name('displayProduct');
+    Route::get('/update-category',[DashboardController::class,'update_category'])->name('updateCategory');
 
-Route::post('/apply-discount',[DashboardController::class,'apply_discount'])->name('applyDiscount');
+    Route::post('/category-update',[DashboardController::class,'category_update'])->name('categoryUpdate');
 
-Route::post('/update-product',[DashboardController::class,'update_products'])->name('updateProduct');
+    Route::get('/delete-category',[DashboardController::class,'delete_category'])->name('deleteCategory');
 
-Route::get('/delete-product',[DashboardController::class,'delete_product'])->name('deleteProduct');
+    Route::get('/add-product',[DashboardController::class,'add_product'])->name('addProduct');
 
-Route::get('/customerInfo',[DashboardController::class,'cutomer_info'])->name('customerInfo');
+    Route::post('/insert-product',[DashboardController::class,'insert_product'])->name('insertProduct');
 
-Route::get('/depoInfo',[DashboardController::class,'depo_info'])->name('depoInfo');
+    Route::get('/display-product',[DashboardController::class,'display_products'])->name('displayProduct');
 
-Route::post('/depo-status-update',[DashboardController::class,'depo_status_update'])->name('depoStatusUpdate');
+    Route::post('/apply-discount',[DashboardController::class,'apply_discount'])->name('applyDiscount');
 
-Route::get('/displayAdmin',[AdminController::class,'display_admin'])->name('displayAdmin');
+    Route::post('/update-product',[DashboardController::class,'update_products'])->name('updateProduct');
 
-Route::post('/create-admin',[AdminController::class,'create_admin'])->name('createAdmin');
+    Route::get('/delete-product',[DashboardController::class,'delete_product'])->name('deleteProduct');
 
-Route::post('/update-admin',[AdminController::class,'update_admin'])->name('updateAdmin');
+    Route::get('/customerInfo',[DashboardController::class,'cutomer_info'])->name('customerInfo');
 
-Route::get('/displayPermission',[AdminController::class,'display_permission'])->name('displayPermission');
+    Route::get('/depoInfo',[DashboardController::class,'depo_info'])->name('depoInfo');
 
-Route::post('/create-permission',[AdminController::class,'create_permission'])->name('createPermission');
+    Route::post('/depo-status-update',[DashboardController::class,'depo_status_update'])->name('depoStatusUpdate');
 
-Route::post('/assignPermission',[AdminController::class,'assign_permission'])->name('assignPermission');
+    Route::get('/displayAdmin',[AdminController::class,'display_admin'])->name('displayAdmin');
 
-Route::delete('/permission/delete', [AdminController::class, 'delete_permission'])->name('permission.delete');
+    Route::post('/create-admin',[AdminController::class,'create_admin'])->name('createAdmin');
 
-Route::post('/removePermission',[AdminController::class, 'remove_permission'])->name('removePermission');
+    Route::post('/update-admin',[AdminController::class,'update_admin'])->name('updateAdmin');
 
-Route::post('/updatePermission',[AdminController::class, 'update_permission_name'])->name('updatePermission');
+    Route::get('/displayPermission',[AdminController::class,'display_permission'])->name('displayPermission');
 
-Route::get('/customerShippingCharges',[DashboardController::class,'customer_shipping'])->name('customerShippingCharges');
+    Route::post('/create-permission',[AdminController::class,'create_permission'])->name('createPermission');
 
-Route::get('/depoShippingCharges',[DashboardController::class,'depo_shipping'])->name('depoShippingCharges');
+    Route::post('/assignPermission',[AdminController::class,'assign_permission'])->name('assignPermission');
 
-Route::post('/createShippingCharges',[DashboardController::class,'insert_shipping'])->name('createShippingCharges');
+    Route::delete('/permission/delete', [AdminController::class, 'delete_permission'])->name('permission.delete');
 
-Route::post('/updateShippingCharges',[DashboardController::class,'update_shipping'])->name('updateShippingCharges');
+    Route::post('/removePermission',[AdminController::class, 'remove_permission'])->name('removePermission');
 
-Route::get('/customer-orders',[DashboardController::class,'customer_order'])->name('customerOrders');
+    Route::post('/updatePermission',[AdminController::class, 'update_permission_name'])->name('updatePermission');
 
-Route::post('/update-order',[DashboardController::class,'update_delivary'])->name('updateOrder');
+    Route::get('/customerShippingCharges',[DashboardController::class,'customer_shipping'])->name('customerShippingCharges');
 
-Route::get('/customerInvoice',[DashboardController::class,'invoice'])->name('invoice');
+    Route::get('/depoShippingCharges',[DashboardController::class,'depo_shipping'])->name('depoShippingCharges');
 
-Route::get('/customerDeliveryTracking',[DashboardController::class,'customer_delivery'])->name('deliveryTracking');
+    Route::post('/createShippingCharges',[DashboardController::class,'insert_shipping'])->name('createShippingCharges');
 
-Route::post('/updateDelivery',[DashboardController::class,'orderDelivery'])->name('updateDelivery');
+    Route::post('/updateShippingCharges',[DashboardController::class,'update_shipping'])->name('updateShippingCharges');
 
-Route::get('/depo-orders',[DashboardController::class,'depo_order'])->name('depoOrders');
+    Route::get('/customer-orders',[DashboardController::class,'customer_order'])->name('customerOrders');
 
-Route::get('/depoDeliveryTracking',[DashboardController::class,'depo_delivery'])->name('depoTracking');
+    Route::post('/update-order',[DashboardController::class,'update_delivary'])->name('updateOrder');
 
-Route::get('/daily-sales',[SalesReport::class,'daily_sales'])->name('dailySales');
+    Route::get('/customerInvoice',[DashboardController::class,'invoice'])->name('invoice');
 
-Route::get('/daily-sales-report', [SalesReport::class, 'daily_sales'])->name('daily-sales-report');
+    Route::get('/customerDeliveryTracking',[DashboardController::class,'customer_delivery'])->name('deliveryTracking');
 
-Route::get('/monthly-sales',[SalesReport::class,'monthly_sales'])->name('monthlySales');
+    Route::post('/updateDelivery',[DashboardController::class,'orderDelivery'])->name('updateDelivery');
 
-Route::get('/monthly-sales-report', [SalesReport::class, 'monthly_sales'])->name('monthly-sales-report');
+    Route::get('/depo-orders',[DashboardController::class,'depo_order'])->name('depoOrders');
 
-Route::get('/yearly-sales',[SalesReport::class,'yearly_sales'])->name('yearlySales');
+    Route::get('/depoDeliveryTracking',[DashboardController::class,'depo_delivery'])->name('depoTracking');
 
-Route::get('/yearly-sales-report', [SalesReport::class, 'yearly_sales'])->name('yearly-sales-report');
+    Route::get('/daily-sales',[SalesReport::class,'daily_sales'])->name('dailySales');
 
-Route::post('/update-profile-pic',[ProfileController::class,'profile_control'])->name('updateProfilePic');
+    Route::get('/daily-sales-report', [SalesReport::class, 'daily_sales'])->name('daily-sales-report');
 
-Route::post('/post',[ProfileController::class,'post_upload'])->name('post');
+    Route::get('/monthly-sales',[SalesReport::class,'monthly_sales'])->name('monthlySales');
 
-Route::post('/likes',[ProfileController::class,'likes'])->name('likes');
+    Route::get('/monthly-sales-report', [SalesReport::class, 'monthly_sales'])->name('monthly-sales-report');
 
-Route::get('/website/marquee',[DashboardController::class,'marquee'])->name('marquee');
+    Route::get('/yearly-sales',[SalesReport::class,'yearly_sales'])->name('yearlySales');
 
-Route::post('/insertMarquee',[DashboardController::class,'insertMarquee'])->name('insertMarquee');
+    Route::get('/yearly-sales-report', [SalesReport::class, 'yearly_sales'])->name('yearly-sales-report');
+
+    Route::post('/update-profile-pic',[ProfileController::class,'profile_control'])->name('updateProfilePic');
+
+    Route::post('/post',[ProfileController::class,'post_upload'])->name('post');
+
+    Route::post('/likes',[ProfileController::class,'likes'])->name('likes');
+
+    Route::get('/website/marquee',[DashboardController::class,'marquee'])->name('marquee');
+
+    Route::post('/insertMarquee',[DashboardController::class,'insertMarquee'])->name('insertMarquee');
+
+    Route::get('/testimonial',[DashboardController::class,'testimonial'])->name('testimonial');
+
+    Route::post('/insertTestimonial',[DashboardController::class,'insertTestimonial'])->name('insertTestimonial');
+
+    Route::put('/testimonials/update/{id}', [DashboardController::class, 'updateTestimonial'])->name('updateTestimonial');
+
+    Route::delete('/testimonials/delete/{id}', [DashboardController::class, 'deleteTestimonial'])->name('deleteTestimonial');
+
+    Route::get('/about_us',[DashboardController::class,'about_us'])->name('about_us');
+
+    Route::post('/img-upload',[DashboardController::class,'img_upload'])->name('ckeditior.upload');
+
+    Route::post('/insertAboutUs',[DashboardController::class,'about_us_upload'])->name('about_us_upload');
+
+    Route::get('/privacy-policy',[DashboardController::class,'privacy'])->name('privacy_policy');
+
+    Route::post('/insertPrivacy',[DashboardController::class,'privacy_upload'])->name('privacy_upload');
+
+    Route::get('/blogs',[DashboardController::class,'blogs'])->name('blogs');
+
+    Route::post('/insertBlogs',[DashboardController::class,'insertBlogs'])->name('insertBlogs');
+
+    Route::put('/blogs/update/{id}', [DashboardController::class, 'updateBlogs'])->name('updateBlogs');
+
+    Route::delete('/blogs/delete/{id}', [DashboardController::class, 'deleteBlogs'])->name('deleteBlogs');
+
+    Route::get('/contact',[DashboardController::class,'contact_page'])->name('contact_page');
+
+    Route::post('/contact',[DashboardController::class,'contact_upload'])->name('contact_upload');
+
+
+
+Route::get('/logout',[DashboardController::class,'logout'])->name('logout');

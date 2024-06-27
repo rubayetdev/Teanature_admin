@@ -290,19 +290,19 @@ License: For each use you must have a valid license purchased only from above li
                                             @endif
                                         </li>
                                         <li class="dropdown-item py-2">
-                                            <a href="javascript:;" class="text-body ms-0">
+                                            <a href="{{route('profile',['id'=>$admin->id])}}" class="text-body ms-0">
                                                 <i class="me-2 icon-md" data-feather="edit"></i>
                                                 <span>Edit Profile</span>
                                             </a>
                                         </li>
                                         <li class="dropdown-item py-2">
-                                            <a href="javascript:;" class="text-body ms-0">
+                                            <a href="https://www.teanature.com/" class="text-body ms-0">
                                                 <i class="me-2 icon-md" data-feather="repeat"></i>
                                                 <span>Switch User</span>
                                             </a>
                                         </li>
                                         <li class="dropdown-item py-2">
-                                            <a href="javascript:;" class="text-body ms-0">
+                                            <a href="{{route('logout')}}" class="text-body ms-0">
                                                 <i class="me-2 icon-md" data-feather="log-out"></i>
                                                 <span>Log Out</span>
                                             </a>
@@ -403,60 +403,38 @@ License: For each use you must have a valid license purchased only from above li
                                 </a>
                                 <div class="submenu">
                                     <div class="col-group-wrapper row">
-                                        <div class="col-group col-md-2">
+                                        <div class="col-group col-md-4">
                                             <p class="category-heading">Home</p>
-                                            <div class="submenu-item">
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <ul>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/blank-page.html">Home page</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <ul>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{{ route('marquee', ['id' => $admin]) }}">Marquee Text</a>
+                                                </li>
+                                            </ul>
                                         </div>
                                         <div class="col-group col-md-4">
                                             <p class="category-heading">Explore Pages</p>
                                             <div class="submenu-item">
                                                 <div class="row">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-8">
                                                         <ul>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/blank-page.html">Feature</a></li>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/faq.html">About</a></li>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/invoice.html">Article</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="{{route('about_us',['id'=>$admin])}}">About</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="{{route('testimonial',['id'=>$admin])}}">Testimonial</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="{{route('privacy_policy',['id'=>$admin])}}">Privacy and Policy</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <ul>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/profile.html">Contact</a></li>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/pricing.html">Testimonial</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="{{route('blogs',['id'=>$admin])}}">Blogs</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="{{route('contact_page',['id'=>$admin])}}">Contact</a></li>
+                                                            {{--                                                    <li class="nav-item"><a class="nav-link" href="pages/general/invoice.html">Privacy and Policy</a></li>--}}
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-group col-md-3">
-                                            <p class="category-heading">Auth Pages</p>
-                                            <ul class="submenu-item">
-                                                <li class="nav-item"><a class="nav-link" href="pages/auth/login.html">Login</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="pages/auth/register.html">Register</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-group col-md-3">
-                                            <p class="category-heading">Error Pages</p>
-                                            <ul class="submenu-item">
-                                                <li class="nav-item"><a class="nav-link" href="pages/error/404.html">404</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="pages/error/500.html">500</a></li>
-                                            </ul>
-                                        </div>
+
                                     </div>
                                 </div>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.nobleui.com/html/documentation/docs.html" target="_blank" class="nav-link">
-                                    <i class="link-icon" data-feather="hash"></i>
-                                    <span class="menu-title">Documentation</span>
-                                </a>
                             </li>
                         </ul>
                     </div>
@@ -667,23 +645,23 @@ License: For each use you must have a valid license purchased only from above li
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="aboutField">About</label>
-                                                            <textarea class="form-control" id="aboutField" name="about" rows="3"></textarea>
+                                                            <textarea class="form-control" id="aboutField" name="about" rows="3">@if(isset($adminprofile->about)) {{$adminprofile->about}} @endif</textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="dropdownMenu">Facebook</label>
-                                                            <input type="url" class="form-control-file" name="facebook" id="profileImage">
+                                                            <input type="url" class="form-control-file" name="facebook" value="@if(isset($adminprofile->facebook)) {{$adminprofile->facebook}} @endif" id="profileImage">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="dropdownMenu">X</label>
-                                                            <input type="url" class="form-control-file" name="twitter" id="profileImage">
+                                                            <input type="url" class="form-control-file" name="twitter" value="@if(isset($adminprofile->twitter)) {{$adminprofile->twitter}} @endif" id="profileImage">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="dropdownMenu">Instagram</label>
-                                                            <input type="url" class="form-control-file" name="insta" id="profileImage">
+                                                            <input type="url" class="form-control-file" name="insta" value="@if(isset($adminprofile->instagram)) {{$adminprofile->instagram}} @endif" id="profileImage">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="dropdownMenu">Linkedin</label>
-                                                            <input type="url" class="form-control-file" name="link" id="profileImage">
+                                                            <input type="url" class="form-control-file" name="link" value="@if(isset($adminprofile->linkedin)) {{$adminprofile->linkedin}} @endif" id="profileImage">
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Save changes</button>
                                                     </form>
@@ -694,22 +672,22 @@ License: For each use you must have a valid license purchased only from above li
 
                                 </div>
 							</div>
-                            <div class="d-flex justify-content-center p-3 rounded-bottom">
-                                <ul class="d-flex align-items-center m-0 p-0">
-                                    <li class="d-flex align-items-center active">
-                                        <i class="me-1 icon-md text-primary" data-feather="columns"></i>
-                                        <button type="submit" class="btn btn-primary">Timeline</button>
-                                    </li>
-                                    <li class="ms-3 ps-3 border-start d-flex align-items-center">
-                                        <i class="me-1 icon-md" data-feather="user"></i>
-                                        <button type="submit" class="btn btn-primary">About</button>
-                                    </li>
-                                    <li class="ms-3 ps-3 border-start d-flex align-items-center">
-                                        <i class="me-1 icon-md" data-feather="user"></i>
-                                        <button type="submit" class="btn btn-primary">About</button>
-                                    </li>
-                                </ul>
-                            </div>
+{{--                            <div class="d-flex justify-content-center p-3 rounded-bottom">--}}
+{{--                                <ul class="d-flex align-items-center m-0 p-0">--}}
+{{--                                    <li class="d-flex align-items-center active">--}}
+{{--                                        <i class="me-1 icon-md text-primary" data-feather="columns"></i>--}}
+{{--                                        <button type="submit" class="btn btn-primary">Timeline</button>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="ms-3 ps-3 border-start d-flex align-items-center">--}}
+{{--                                        <i class="me-1 icon-md" data-feather="user"></i>--}}
+{{--                                        <button type="submit" class="btn btn-primary">About</button>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="ms-3 ps-3 border-start d-flex align-items-center">--}}
+{{--                                        <i class="me-1 icon-md" data-feather="user"></i>--}}
+{{--                                        <button type="submit" class="btn btn-primary">About</button>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
 						</div>
 					</div>
 				</div>
@@ -720,18 +698,9 @@ License: For each use you must have a valid license purchased only from above li
 							<div class="card-body">
 								<div class="d-flex align-items-center justify-content-between mb-2">
 									<h6 class="card-title mb-0">About</h6>
-									<div class="dropdown">
-										<a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-										</a>
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-											<a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-											<a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="git-branch" class="icon-sm me-2"></i> <span class="">Update</span></a>
-											<a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View all</span></a>
-										</div>
-									</div>
+
 								</div>
-								<p>Hi! I'm Amiah the Senior UI Designer at NobleUI. We hope you enjoy the design and quality of Social.</p>
+								<p>@if(isset($adminprofile->about)) {{$adminprofile->about}} @endif</p>
 								<div class="mt-3">
 									<label class="tx-11 fw-bolder mb-0 text-uppercase">Joined:</label>
 									<p class="text-muted">@if($admin)
@@ -756,20 +725,28 @@ License: For each use you must have a valid license purchased only from above li
                                             Demo Account
                                         @endif</p>
 								</div>
-								<div class="mt-3">
-									<label class="tx-11 fw-bolder mb-0 text-uppercase">Website:</label>
-									<p class="text-muted">www.nobleui.com</p>
-								</div>
+
 								<div class="mt-3 d-flex social-links">
-									<a href="javascript:;" class="btn btn-icon border btn-xs me-2">
-										<i data-feather="github"></i>
+                                    @if(isset($adminprofile->facebook))
+									<a href="{{$adminprofile->facebook}}" target="_blank" class="btn btn-icon border btn-xs me-2">
+										<i data-feather="facebook"></i>
 									</a>
-									<a href="javascript:;" class="btn btn-icon border btn-xs me-2">
+                                    @endif
+                                        @if(isset($adminprofile->instagram))
+                                    <a href="{{$adminprofile->instagram}}" target="_blank" class="btn btn-icon border btn-xs me-2">
+                                        <i data-feather="instagram"></i>
+                                    </a>
+                                        @endif
+                                        @if(isset($adminprofile->twitter))
+									<a href="{{$adminprofile->twitter}}" target="_blank" class="btn btn-icon border btn-xs me-2">
 										<i data-feather="twitter"></i>
 									</a>
-									<a href="javascript:;" class="btn btn-icon border btn-xs me-2">
-										<i data-feather="instagram"></i>
-									</a>
+                                        @endif
+                                        @if(isset($adminprofile->linkedin))
+                                    <a href="{{$adminprofile->linkedin}}" target="_blank" class="btn btn-icon border btn-xs me-2">
+                                        <i data-feather="linkedin"></i>
+                                    </a>
+                                        @endif
 								</div>
 							</div>
 						</div>
@@ -807,8 +784,10 @@ License: For each use you must have a valid license purchased only from above li
 												<img class="img-xs rounded-circle" src="{{asset('admins/'.$post->image)}}" alt="">
 												<div class="ms-2">
 													<p>{{$post->name}}</p>
-													<p class="tx-11 text-muted">1 min ago</p>
-												</div>
+
+                                                    <p class="tx-11 text-muted">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</p>
+
+                                                </div>
 											</div>
                                             <div class="dropdown">
                                                 <a type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

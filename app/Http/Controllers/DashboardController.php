@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\Admin;
+use App\Models\Blogs;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\marqueetext;
+use App\Models\Privacy;
 use App\Models\Products;
 use App\Models\ShippingCharges;
+use App\Models\Testimonial;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
@@ -486,12 +493,211 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
-    public function updateMarquee(Request $request)
+    public function testimonial(Request $request)
     {
-        marqueetext::where('id',$request->input('id'))->update([
-            'text'=>$request->input('name')
+        $user = \request('id');
+
+        $admin = Admin::where('id',$user)->first();
+
+        $mar = Testimonial::all();
+
+        return view('website.testimonial',['id'=>$user,'admin'=>$admin,'marquee'=>$mar]);
+
+    }
+
+    public function insertTestimonial(Request $request)
+    {
+        Testimonial::create([
+            'title'=>$request->input('name'),
+            'description'=>$request->input('description'),
+            'profession'=>$request->input('profession')
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Testimonial created successfully');
     }
+
+    public function updateTestimonial(Request $request, $id) {
+        $testimonial = Testimonial::findOrFail($id);
+        $testimonial->update($request->all());
+        return redirect()->back()->with('success', 'Testimonial updated successfully');
+    }
+
+    public function deleteTestimonial($id)
+    {
+        $testimonial = Testimonial::findOrFail($id);
+        $testimonial->delete();
+        return redirect()->back()->with('success', 'Testimonial deleted successfully');
+    }
+
+    public function about_us()
+    {
+        $user = \request('id');
+
+        $admin = Admin::where('id',$user)->first();
+
+        $mar = About::first();
+
+        return view('website.about',['id'=>$user,'admin'=>$admin,'marquee'=>$mar]);
+    }
+
+    public function img_upload(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+
+            $request->file('upload')->move(public_path('images'), $fileName);
+
+            $url = asset('images/' . $fileName);
+
+            return response()->json(['url'=>$url,'fileName'=>$fileName,'uploaded'=>1]);
+        }
+    }
+
+    public function about_us_upload(Request $request)
+    {
+        $check = About::where('id',$request->input('id'))->first();
+
+        if ($check){
+            About::where('id',$request->input('id'))->update([
+                'title'=>$request->input('name'),
+                'description'=>$request->input('description')
+            ]);
+            return redirect()->back()->with('success', 'About Us updated successfully');
+        }
+        else{
+            About::create([
+                'title'=>$request->input('name'),
+                'description'=>$request->input('description')
+            ]);
+
+            return redirect()->back()->with('success', 'About Us uploaded successfully');
+        }
+    }
+
+    public function privacy()
+    {
+        $user = \request('id');
+
+        $admin = Admin::where('id',$user)->first();
+
+        $mar = Privacy::first();
+
+        return view('website.privacy-policy',['id'=>$user,'admin'=>$admin,'marquee'=>$mar]);
+    }
+
+    public function privacy_upload(Request $request)
+    {
+        $check = Privacy::where('id',$request->input('id'))->first();
+
+        if ($check){
+            Privacy::where('id',$request->input('id'))->update([
+
+                'privacy'=>$request->input('description')
+            ]);
+            return redirect()->back()->with('success', 'About Us updated successfully');
+        }
+        else{
+            Privacy::create([
+
+                'privacy'=>$request->input('description')
+            ]);
+
+            return redirect()->back()->with('success', 'Privacy uploaded successfully');
+        }
+    }
+
+    public function blogs()
+    {
+        $user = \request('id');
+
+        $admin = Admin::where('id',$user)->first();
+
+        $mar = Blogs::all();
+
+        return view('website.blogs',['id'=>$user,'admin'=>$admin,'marquee'=>$mar]);
+    }
+
+    public function insertBlogs(Request $request)
+    {
+//        dd($request->all());
+      $user =  Blogs::create([
+            'title'=>$request->input('name'),
+            'slug'=>$request->input('description'),
+        ]);
+
+//      dd($user);
+        return redirect()->back()->with('success', 'Testimonial created successfully');
+    }
+
+    public function updateBlogs(Request $request, $id) {
+
+        $testimonial = Blogs::findOrFail($id);
+//        dd($request->all());
+        $testimonial->update([
+            'title'=>$request->input('title'),
+            'slug'=>$request->input('description')
+        ]);
+        return redirect()->back()->with('success', 'Testimonial updated successfully');
+    }
+
+    public function deleteBlogs($id)
+    {
+
+        $testimonial = Blogs::findOrFail($id);
+        $testimonial->delete();
+        return redirect()->back()->with('success', 'Testimonial deleted successfully');
+    }
+
+    public function contact_page()
+    {
+        $user = \request('id');
+
+        $admin = Admin::where('id',$user)->first();
+
+        $mar = Contact::first();
+
+        return view('website.contact',['id'=>$user,'admin'=>$admin,'marquee'=>$mar]);
+    }
+
+    public function contact_upload(Request $request)
+    {
+        $check = Contact::where('id',$request->input('id'))->first();
+
+        if ($check){
+            Contact::where('id',$request->input('id'))->update([
+                'fphone'=>$request->input('fphone'),
+                'sphone'=>$request->input('sphone'),
+                'femail'=>$request->input('femail'),
+                'semail'=>$request->input('semail'),
+                'address'=>$request->input('address')
+            ]);
+            return redirect()->back()->with('success', 'Contact updated successfully');
+        }
+        else{
+            Contact::create([
+                'fphone'=>$request->input('fphone'),
+                'sphone'=>$request->input('sphone'),
+                'femail'=>$request->input('femail'),
+                'semail'=>$request->input('semail'),
+                'address'=>$request->input('address')
+
+            ]);
+
+            return redirect()->back()->with('success', 'Contact uploaded successfully');
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        Session::flush();
+
+        return redirect('/');
+    }
+
 }
+

@@ -58,14 +58,35 @@ class ProfileController extends Controller
             $cover->move($folderPath, $coverName);
         }
             if ($check) {
-                $check->update([
-                    'cover_pic' => $coverName,
-                ]);
+                if ($request->hasFile('cover')) {
+                    $check->update([
+                        'cover_pic' => $coverName,
+                        'about' => $request->input('about'),
+                        'facebook' => $request->input('facebook'),
+                        'twitter' => $request->input('twitter'),
+                        'instagram' => $request->input('insta'),
+                        'linkedin' => $request->input('link')
+                    ]);
+                }
+                else{
+                    $check->update([
+                        'about' => $request->input('about'),
+                        'facebook' => $request->input('facebook'),
+                        'twitter' => $request->input('twitter'),
+                        'instagram' => $request->input('insta'),
+                        'linkedin' => $request->input('link')
+                    ]);
+                }
 
             } else {
                 AdminProfile::create([
                     'admin_id' => $id,
                     'cover_pic' => $coverName,
+                    'about' =>$request->input('about'),
+                    'facebook' =>$request->input('facebook'),
+                    'twitter' =>$request->input('twitter'),
+                    'instagram' =>$request->input('insta'),
+                    'linkedin' =>$request->input('link')
                 ]);
             }
 

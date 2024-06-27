@@ -268,25 +268,32 @@
                                     </div>
                                     <ul class="list-unstyled p-1">
                                         <li class="dropdown-item py-2">
-                                            <a href="pages/general/profile.html" class="text-body ms-0">
-                                                <i class="me-2 icon-md" data-feather="user"></i>
-                                                <span>Profile</span>
-                                            </a>
+                                            @if($admin)
+                                                <a href="{{route('profile',['id'=>$admin->id])}}" class="text-body ms-0">
+                                                    <i class="me-2 icon-md" data-feather="user"></i>
+                                                    <span>Profile</span>
+                                                </a>
+                                            @else
+                                                <a href="{{route('profile',['id'=>$id])}}" class="text-body ms-0">
+                                                    <i class="me-2 icon-md" data-feather="user"></i>
+                                                    <span>Profile</span>
+                                                </a>
+                                            @endif
                                         </li>
                                         <li class="dropdown-item py-2">
-                                            <a href="javascript:;" class="text-body ms-0">
+                                            <a href="{{route('profile',['id'=>$admin->id])}}" class="text-body ms-0">
                                                 <i class="me-2 icon-md" data-feather="edit"></i>
                                                 <span>Edit Profile</span>
                                             </a>
                                         </li>
                                         <li class="dropdown-item py-2">
-                                            <a href="javascript:;" class="text-body ms-0">
+                                            <a href="https://www.teanature.com/" class="text-body ms-0">
                                                 <i class="me-2 icon-md" data-feather="repeat"></i>
                                                 <span>Switch User</span>
                                             </a>
                                         </li>
                                         <li class="dropdown-item py-2">
-                                            <a href="javascript:;" class="text-body ms-0">
+                                            <a href="{{route('logout')}}" class="text-body ms-0">
                                                 <i class="me-2 icon-md" data-feather="log-out"></i>
                                                 <span>Log Out</span>
                                             </a>
@@ -387,60 +394,38 @@
                                 </a>
                                 <div class="submenu">
                                     <div class="col-group-wrapper row">
-                                        <div class="col-group col-md-2">
+                                        <div class="col-group col-md-4">
                                             <p class="category-heading">Home</p>
-                                            <div class="submenu-item">
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <ul>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/blank-page.html">Home page</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <ul>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{{ route('marquee', ['id' => $admin]) }}">Marquee Text</a>
+                                                </li>
+                                            </ul>
                                         </div>
                                         <div class="col-group col-md-4">
                                             <p class="category-heading">Explore Pages</p>
                                             <div class="submenu-item">
                                                 <div class="row">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-8">
                                                         <ul>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/blank-page.html">Feature</a></li>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/faq.html">About</a></li>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/invoice.html">Article</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="{{route('about_us',['id'=>$admin])}}">About</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="{{route('testimonial',['id'=>$admin])}}">Testimonial</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="{{route('privacy_policy',['id'=>$admin])}}">Privacy and Policy</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <ul>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/profile.html">Contact</a></li>
-                                                            <li class="nav-item"><a class="nav-link" href="pages/general/pricing.html">Testimonial</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="{{route('blogs',['id'=>$admin])}}">Blogs</a></li>
+                                                            <li class="nav-item"><a class="nav-link" href="{{route('contact_page',['id'=>$admin])}}">Contact</a></li>
+                                                            {{--                                                    <li class="nav-item"><a class="nav-link" href="pages/general/invoice.html">Privacy and Policy</a></li>--}}
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-group col-md-3">
-                                            <p class="category-heading">Auth Pages</p>
-                                            <ul class="submenu-item">
-                                                <li class="nav-item"><a class="nav-link" href="pages/auth/login.html">Login</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="pages/auth/register.html">Register</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-group col-md-3">
-                                            <p class="category-heading">Error Pages</p>
-                                            <ul class="submenu-item">
-                                                <li class="nav-item"><a class="nav-link" href="pages/error/404.html">404</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="pages/error/500.html">500</a></li>
-                                            </ul>
-                                        </div>
+
                                     </div>
                                 </div>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.nobleui.com/html/documentation/docs.html" target="_blank" class="nav-link">
-                                    <i class="link-icon" data-feather="hash"></i>
-                                    <span class="menu-title">Documentation</span>
-                                </a>
                             </li>
                         </ul>
                     </div>
