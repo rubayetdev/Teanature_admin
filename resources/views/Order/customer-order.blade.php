@@ -672,6 +672,7 @@
                                     <tr>
                                         <th>Invoice Id</th>
                                         <th>User Name</th>
+                                        <th>Phone Number</th>
                                         <th>Shipping Address</th>
                                         <th>Total</th>
                                         <th>Payment</th>
@@ -697,6 +698,7 @@
                                                 <td rowspan="{{ $rowSpan }}" style="vertical-align: middle; text-align: center;">{{$cata->invoice_id}}</td>
                                             @endif
                                             <td>{{$cata->name}}</td>
+                                                <td>{{$cata->phone}}</td>
                                             <td>
                                                 {{$cata->shipping_address}}
                                             </td>

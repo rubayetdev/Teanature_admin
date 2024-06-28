@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -355,6 +356,7 @@ class DashboardController extends Controller
             ->where('o1.order_status', 'Processing')
             ->where('o1.roles', 'depo')
             ->join('users as ci', 'ci.id', '=', 'o1.user_id')
+            ->join('depo_infos as c2', 'c2.id', '=', 'o1.user_id')
             ->get();
 
 
@@ -444,6 +446,7 @@ class DashboardController extends Controller
             ->whereIn('o1.order_status', ['Shipping','Delivered'])
             ->where('o1.roles', 'depo')
             ->join('users as ci', 'ci.id', '=', 'o1.user_id')
+            ->join('depo_infos as c2', 'c2.id', '=', 'o1.user_id')
             ->distinct()
             ->get();
 
@@ -551,6 +554,16 @@ class DashboardController extends Controller
             $request->file('upload')->move(public_path('images'), $fileName);
 
             $url = asset('images/' . $fileName);
+
+            $sharedFolderPath = 'I:\Trodev\Tea Nature\TeaNature_User\public\storage';
+
+            // Ensure the shared folder exists
+            if (!File::exists($sharedFolderPath)) {
+                File::makeDirectory($sharedFolderPath, 0755, true);
+            }
+
+            // Copy the file to the shared folder
+            File::copy(public_path('images/' . $fileName), $sharedFolderPath . '/' . $fileName);
 
             return response()->json(['url'=>$url,'fileName'=>$fileName,'uploaded'=>1]);
         }
