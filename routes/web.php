@@ -91,15 +91,15 @@ Route::post('/login', [LoginController::class, 'loginController'])->name('login'
 
     Route::get('/daily-sales',[SalesReport::class,'daily_sales'])->name('dailySales');
 
-    Route::get('/daily-sales-report', [SalesReport::class, 'daily_sales'])->name('daily-sales-report');
+    Route::get('/daily-sales-report/{id}', [SalesReport::class, 'daily_sales'])->name('daily-sales-report');
 
     Route::get('/monthly-sales',[SalesReport::class,'monthly_sales'])->name('monthlySales');
 
-    Route::get('/monthly-sales-report', [SalesReport::class, 'monthly_sales'])->name('monthly-sales-report');
+    Route::get('/monthly-sales-report/{id}', [SalesReport::class, 'monthly_sales'])->name('monthly-sales-report');
 
     Route::get('/yearly-sales',[SalesReport::class,'yearly_sales'])->name('yearlySales');
 
-    Route::get('/yearly-sales-report', [SalesReport::class, 'yearly_sales'])->name('yearly-sales-report');
+    Route::get('/yearly-sales-report/{id}', [SalesReport::class, 'yearly_sales'])->name('yearly-sales-report');
 
     Route::post('/update-profile-pic',[ProfileController::class,'profile_control'])->name('updateProfilePic');
 

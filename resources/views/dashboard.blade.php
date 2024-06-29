@@ -408,7 +408,7 @@
                         </a>
                         <div class="submenu">
                             <ul class="submenu-item">
-                                <li class="nav-item"><a class="nav-link" href="{{ route('displayAdmin', ['id' => $admin]) }}">Admins</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('displayAdmin', ['id' => $admin->id]) }}">Admins</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('displayPermission', ['id' => $admin]) }}">Permission</a></li>
                             </ul>
                         </div>

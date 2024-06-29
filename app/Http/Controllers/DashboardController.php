@@ -17,8 +17,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\OrderShipped;
 
 class DashboardController extends Controller
 {
@@ -375,7 +377,14 @@ class DashboardController extends Controller
             'delivery_date' => $request->input('delivery_date'),
             'order_status' =>'Shipping'
         ]);
+        $userEmail = DB::table('users')
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->where('orders.invoice_id', $request->input('prod_id'))
+            ->value('users.email');
 
+//        dd($userEmail);
+
+        Mail::to($userEmail)->send(new OrderShipped($request->input('delivery_date')));
         return redirect()->back();
     }
 
@@ -549,21 +558,25 @@ class DashboardController extends Controller
             $originName = $request->file('upload')->getClientOriginalName();
             $fileName = pathinfo($originName, PATHINFO_FILENAME);
             $extension = $request->file('upload')->getClientOriginalExtension();
-            $fileName = $fileName . '_' . time() . '.' . $extension;
+            $fileName = time() . '.' . $extension;
 
             $request->file('upload')->move(public_path('images'), $fileName);
 
             $url = asset('images/' . $fileName);
 
-            $sharedFolderPath = 'I:\Trodev\Tea Nature\TeaNature_User\public\storage';
+            $sharedFolderPath = 'I:\Trodev\Tea Nature\TeaNature_User\public';
 
-            // Ensure the shared folder exists
-            if (!File::exists($sharedFolderPath)) {
-                File::makeDirectory($sharedFolderPath, 0755, true);
+
+            $sharedFilePath = $sharedFolderPath . '\images';
+
+
+            if (!File::exists($sharedFilePath)) {
+                File::makeDirectory($sharedFilePath, 0755, true);
             }
 
-            // Copy the file to the shared folder
-            File::copy(public_path('images/' . $fileName), $sharedFolderPath . '/' . $fileName);
+
+            File::copy(public_path('images/' . $fileName), $sharedFilePath . '\\' . $fileName);
+
 
             return response()->json(['url'=>$url,'fileName'=>$fileName,'uploaded'=>1]);
         }

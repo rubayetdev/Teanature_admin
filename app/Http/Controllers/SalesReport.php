@@ -14,7 +14,7 @@ class SalesReport extends Controller
         $id = request('id');
         $date = $request->input('date', Carbon::today()->toDateString());
 
-        $admin = Admin::where('id',$id)->first();
+        $admin = Admin::find($id);
 
 
         $sales = DB::table('orders')
@@ -29,9 +29,14 @@ class SalesReport extends Controller
 
     public function monthly_sales(Request $request)
     {
-        $id = request('id');
+
+        $id = \request('id');
+        if (!$id) {
+            dd($id);
+            return redirect()->back()->withErrors('Admin ID is missing');
+        }
         $date = $request->input('date', Carbon::today()->format('Y-m'));
-$admin = Admin::where('id',$id)->first();
+        $admin = Admin::where('id',$id)->first();
 
         $startOfMonth = Carbon::parse($date)->startOfMonth();
         $endOfMonth = Carbon::parse($date)->endOfMonth();
@@ -43,7 +48,7 @@ $admin = Admin::where('id',$id)->first();
             ->join('products', 'orders.product_id', '=', 'products.id')
             ->select('orders.*', 'orders.price as total_price', 'products.name as product_name', 'products.price as product_price')
             ->get();
-
+//        dd($sales);
         $totalPrice = $sales->sum('total_price');
 
         return view('SalesReport.monthly-sales',['id'=>$id,'date'=>$date,'sales'=>$sales, 'totalPrice'=>$totalPrice,'admin'=>$admin]);

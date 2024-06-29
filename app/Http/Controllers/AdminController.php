@@ -16,6 +16,7 @@ class AdminController extends Controller
 
         $admins = Admin::where('id',$user)->first();
 
+//        dd($admin);
         return view('Admins.admins',['id'=>$user,'admin'=>$admin,'admins'=>$admins]);
     }
 
